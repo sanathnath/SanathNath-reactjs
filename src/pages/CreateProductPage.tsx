@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup"; 
 import { RootState } from "../redux/store";
@@ -8,6 +7,7 @@ import axios from "axios";
 import { api_token, post_product_api } from "../constants/api";
 import { add_new_product } from "../redux/reducers/productsReducer";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 interface formData {
   name?: string;
@@ -30,7 +30,7 @@ const schema = yup.object().shape({
 /*--------------v------component---v---------------------- */
 
 const CreateProductPage: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ const CreateProductPage: React.FC = () => {
           resolver: yupResolver(schema),
         });
 
-  const { allCategory } = useSelector((state: RootState)=>{
+  const { allCategory } = useAppSelector((state: RootState)=>{
     return state.products;
   })
   const formSubmitHandler: SubmitHandler<formData> = async(data: formData) => {
@@ -64,14 +64,14 @@ const CreateProductPage: React.FC = () => {
   return (
     <div className="py-20 h-screen">
         {isError && <h1 className="text-center text-red-500 font-bold text-lg">Some error happened Retry again</h1> }
-      <div className="pb-20 container flex items-center justify-center">
-        <div className="flex bg-indigo-300 border rounded-xl border-gray shadow-xl h-auto w-3/4 p-5">
-          <div className="w-1/2 flex items-center justify-center text-pink-600">
+      <div className="pb-20 md:container flex items-center justify-center">
+        <div className="w-full flex bg-indigo-300 border rounded-xl border-gray shadow-xl h-auto md:w-3/4 p-5">
+          <div className="hidden md:flex w-0 md:w-1/2  items-center justify-center text-pink-600">
             <div className="border-2 border-pink-500 rounded-lg p-1">
               <h1 className="font-extrabold text-2xl">Create a product</h1>
             </div>
           </div>
-          <div className="w-1/2 bg-gray-50 px-12 py-8 rounded-3xl shadow-inner">
+          <div className="w-full md:w-1/2 bg-gray-50 px-6 md:px-12 py-8 rounded-3xl shadow-inner">
             <form onSubmit={handleSubmit(formSubmitHandler)}>
               <div className="flex flex-col my-4">
                 <label className="pl-6">Name</label>

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { stat } from 'fs';
 
 export interface Products{
   '_id'?:string;
@@ -21,6 +22,7 @@ export interface ProductState {
   allCategory: Products[];
   selectedCategory: Products[];
   isCategoryButtonOpen: boolean;
+  isDrawerOpen: boolean;
 }
 
 const initialState: ProductState = {
@@ -30,6 +32,7 @@ const initialState: ProductState = {
   allCategory:[],
   selectedCategory:[],
   isCategoryButtonOpen:false,
+  isDrawerOpen: false,
 }
 
 export const productSlice = createSlice({
@@ -74,16 +77,9 @@ export const productSlice = createSlice({
     category_button_handler: (state, action: PayloadAction<boolean>) => {
       state.isCategoryButtonOpen = action.payload
     },
-  //   add_to_favorite: (state, action: PayloadAction<Products>) => {
-  //     state.favoriteProducts.push(action.payload)
-  //  },
-  //   remove_from_favorite: (state, action: PayloadAction<string | undefined>) => {
-  //     state.favoriteProducts = state.favoriteProducts.filter((item)=>{
-  //       if (item['_id'] !== action.payload) {
-  //         return item;
-  //       }
-  //     });
-  //   },
+    set_drawer_open: (state, action: PayloadAction<boolean>) => {
+      state.isDrawerOpen = action.payload;
+    }
   },
 })
 
@@ -91,6 +87,6 @@ export const productSlice = createSlice({
 export const { get_all_product, select_product, clean_selected_product,
                get_all_category, select_category, 
                add_new_product, delete_product, 
-               category_button_handler } = productSlice.actions
+               category_button_handler, set_drawer_open } = productSlice.actions
 
 export default productSlice.reducer

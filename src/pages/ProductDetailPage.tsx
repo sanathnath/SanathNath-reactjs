@@ -1,19 +1,22 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { api_token, select_product_api } from '../constants/api';
 import Loading from '../container/Loading';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { add_to_favorite } from '../redux/reducers/favoriteReducer';
 import { clean_selected_product, select_product } from '../redux/reducers/productsReducer';
 import { RootState } from '../redux/store';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{id?: string}>();
-  const { selectedProduct } = useSelector((state: RootState) => {
+
+  const { selectedProduct } = useAppSelector((state: RootState) => {
     return state.products;
   })
-  const dispatch = useDispatch();
+
+  const dispatch = useAppDispatch();
+  
   useEffect(() => {
     axios.get(select_product_api(id),
       {headers:{
@@ -32,9 +35,9 @@ const ProductDetailPage: React.FC = () => {
     <div className="pt-20">
       {Object.keys(selectedProduct).length === 0 ?
       <Loading /> :
-        <div className="container px-24 pb-20">
-        <div className="flex w-full">
-          <div className="w-1/2 flex items-center">
+        <div className="container px-5 lg:px-24 pb-20">
+        <div className="flex flex-col justify-center md:flex-row w-full">
+          <div className="w-full md:w-1/2">
             <img
               src={selectedProduct.avatar}
               alt=""

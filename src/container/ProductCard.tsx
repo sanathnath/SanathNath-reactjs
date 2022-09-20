@@ -1,17 +1,19 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { delete_product, Products } from "../redux/reducers/productsReducer";
+import { Products } from "../redux/reducers/productsReducer";
 import { add_to_favorite } from "../redux/reducers/favoriteReducer";
+import { useAppDispatch } from "../redux/hooks";
 
 interface Props {
   data: Products;
   deleteHandler: (data: string | undefined) => void;
   page?: string;
 }
+
 /**---------------v-------component-------v---------------------- */
 const ProductCard: React.FC<Props> = ({ data, deleteHandler, page }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   return (
     <div
