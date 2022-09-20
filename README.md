@@ -1,3 +1,46 @@
+# Product listing website
+Created a product listing website with features that are mentioned in the question description. Listing the all products in home page that get from api. User can filter the products based on the category. User can add new products in this list and also they can delete products in list. User can add and remove products into watch list(favorite product list). When clicking a specific product page will navigate to product details page and it shows full details of product. 
+
+## Features
+- Header/nav bar:
+    - Product logo: it will navigate to home page
+    - Home link: it will navigate to home page
+    - Watch list link: it will navigate to watch list page
+    - Category link: it will open the category list
+    - Create button: it will navigate to create product page
+
+- Product card:
+    - product image
+    - product name
+    - product price
+    - delete button: for delete a product
+    - add to favorite button: for adding to favorite
+
+- Home page:
+    - listing products by using product card
+
+- Category page:
+    - listing specific category products by using product card
+
+- watch list page:
+    - listing the favorite products by using product card
+
+- Product details page:
+    - showing the details of a product
+
+- Create product page:
+    - it has a form for creating new product
+    - used react-hook-form for handling form
+    - used yup library form validation
+
+## Technologies used
+
+- React with typescript
+- Tailwind css
+- redux
+- redux-toolkit
+- redux-persist
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -13,11 +56,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -39,8 +77,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
